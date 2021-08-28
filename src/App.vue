@@ -3,21 +3,21 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import StartScreen from "./components/StartScreen.vue";
-import MainScreen from "./components/MainScreen.vue";
+import { Options, Vue } from 'vue-class-component';
+import StartScreen from './components/StartScreen.vue';
+import MainScreen from './components/MainScreen.vue';
 
 @Options({
   components: {
     StartScreen,
-    MainScreen,
-  },
+    MainScreen
+  }
 })
 export default class App extends Vue {
   //currentView = "MainScreen";
-  currentView = "StartScreen";
+  currentView = 'StartScreen';
   startGame(): void {
-    this.currentView = "MainScreen";
+    this.currentView = 'MainScreen';
   }
 }
 </script>
