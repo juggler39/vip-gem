@@ -32,6 +32,7 @@ export default defineComponent({
   name: 'MainGame',
   data() {
     return {
+      field: this.$refs['game-field'] as HTMLElement,
       columns: 9,
       rows: 9,
       level: new Level(9, 9),
@@ -49,17 +50,10 @@ export default defineComponent({
       return this.columns * this.rows;
     }
   },
-  methods: {
-    resizeWindow() {
-      const field = this.$refs['game-field'] as HTMLElement;
-      let fieldWidth = 0;
-      if (field) fieldWidth = field.getBoundingClientRect().width;
-      this.pieceWidth = fieldWidth / this.columns;
-    }
-  },
+  methods: {},
   mounted() {
     this.level.generate();
-    console.log(this.level);
+    const items = document.querySelectorAll('.piece');
 
     Draggable.create('.piece', {
       type: 'x,y',
@@ -67,15 +61,22 @@ export default defineComponent({
       lockAxis: true,
       cursor: 'grab',
       onPress: function () {
-        let pieceWidth = 100;
         Draggable.get(this.target).applyBounds({
-          minX: -pieceWidth,
-          minY: -pieceWidth,
-          maxX: pieceWidth,
-          maxY: pieceWidth
+          minX: -this.target.offsetWidth,
+          minY: -this.target.offsetHeight,
+          maxX: this.target.offsetWidth,
+          maxY: this.target.offsetHeight
         });
         this.startX = this.x;
         this.startY = this.y;
+      },
+      onDrag: function () {
+        let i = items.length;
+        while (--i > -1) {
+          if (this.hitTest(items[i], 60)) {
+            console.log('hit');
+          }
+        }
       },
       onDragEnd: function () {
         const target = this.target;
@@ -91,12 +92,6 @@ export default defineComponent({
         });
       }
     });
-  },
-  created() {
-    window.addEventListener('resize', this.resizeWindow);
-  },
-  unmounted() {
-    window.removeEventListener('resize', this.resizeWindow);
   }
 });
 </script>
