@@ -6,16 +6,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import MainGame from "@/components/MainGame.vue";
-import MainMenu from "@/components/MainMenu.vue";
+import { defineComponent } from 'vue';
+import MainGame from '@/components/MainGame.vue';
+import MainMenu from '@/components/MainMenu.vue';
 
 export default defineComponent({
-  name: "MainScreen",
+  name: 'MainScreen',
   components: {
     MainGame,
-    MainMenu,
-  },
+    MainMenu
+  }
 });
 </script>
 

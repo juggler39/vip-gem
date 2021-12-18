@@ -9,108 +9,108 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import InlineSvg from "vue-inline-svg";
-import { gsap } from "gsap";
+import { defineComponent } from 'vue';
+import InlineSvg from 'vue-inline-svg';
+import { gsap } from 'gsap';
 
 export default defineComponent({
-  name: "StartScreen",
-  emits: ["startGame"],
+  name: 'StartScreen',
+  emits: ['startGame'],
   components: {
-    InlineSvg,
+    InlineSvg
   },
   methods: {
     openGameScreen() {
-      this.$emit("startGame", true);
+      this.$emit('startGame', true);
     },
     svgLoaded() {
       const tl = gsap.timeline();
-      gsap.set(".sunbeam", {
-        opacity: 0,
+      gsap.set('.sunbeam', {
+        opacity: 0
       });
-      gsap.set("#logo, .play-game, .cloud", {
+      gsap.set('#logo, .play-game, .cloud', {
         scale: 0,
-        transformOrigin: "50% 50%",
+        transformOrigin: '50% 50%'
       });
-      gsap.set(".tile", {
-        y: 170,
+      gsap.set('.tile', {
+        y: 170
       });
-      gsap.set(".gem", {
-        opacity: 0,
+      gsap.set('.gem', {
+        opacity: 0
       });
-      gsap.set("#earth", {
-        y: 220,
+      gsap.set('#earth', {
+        y: 220
       });
-      tl.to("#preloader", {
+      tl.to('#preloader', {
         opacity: 0,
         duration: 3,
-        onComplete: this.removePreloader,
+        onComplete: this.removePreloader
       })
         .to(
-          "#earth",
+          '#earth',
           {
             y: 0,
-            duration: 3,
+            duration: 3
           },
           0
         )
-        .to(".cloud", {
+        .to('.cloud', {
           opacity: 1,
           scale: 1,
           duration: 3,
-          delay: -2,
+          delay: -2
         })
-        .to(".sunbeam", {
+        .to('.sunbeam', {
           opacity: 1,
           duration: 1,
           stagger: 0.1,
-          delay: -1,
+          delay: -1
         })
         .to(
-          ".tile",
+          '.tile',
           {
             y: 0,
             duration: 1,
-            stagger: 0.1,
+            stagger: 0.1
           },
-          "<"
+          '<'
         )
         .to(
-          ".gem",
+          '.gem',
           {
             opacity: 1,
             duration: 1,
             stagger: 0.1,
-            ease: "bounce.out",
+            ease: 'bounce.out'
           },
-          ">-2"
+          '>-2'
         )
         .to(
-          "#logo",
+          '#logo',
           {
             scale: 1,
             duration: 2,
-            ease: "bounce.out",
+            ease: 'bounce.out'
           },
-          ">-2"
+          '>-2'
         )
 
         .to(
-          ".play-game",
+          '.play-game',
           {
             opacity: 0.9,
             scale: 1,
             duration: 1,
-            ease: "power4.out",
+            ease: 'power4.out'
           },
-          ">"
+          '>'
         );
     },
     removePreloader() {
-      const elem = document.getElementById("preloader");
+      const elem = document.getElementById('preloader');
       elem?.remove();
-    },
-  },
+    }
+  }
 });
 </script>
 
