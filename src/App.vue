@@ -1,19 +1,16 @@
 <template>
   <component @startGame="startGame" v-bind:is="currentView"></component>
-  <MessageDisplay />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import StartScreen from './components/StartScreen.vue';
 import MainScreen from './components/MainScreen.vue';
-import MessageDisplay from './components/MessageDisplay.vue';
 
 @Options({
   components: {
     StartScreen,
-    MainScreen,
-    MessageDisplay
+    MainScreen
   }
 })
 export default class App extends Vue {

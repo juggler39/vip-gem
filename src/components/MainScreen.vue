@@ -1,6 +1,7 @@
 <template>
   <section class="main-screen">
     <MainMenu />
+    <TrainingMain />
     <MainGame />
   </section>
 </template>
@@ -9,12 +10,14 @@
 import { defineComponent } from 'vue';
 import MainGame from '@/components/MainGame.vue';
 import MainMenu from '@/components/MainMenu.vue';
+import TrainingMain from '@/components/training/TrainingMain.vue';
 
 export default defineComponent({
   name: 'MainScreen',
   components: {
     MainGame,
-    MainMenu
+    MainMenu,
+    TrainingMain
   }
 });
 </script>
