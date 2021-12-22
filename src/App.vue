@@ -1,4 +1,6 @@
 <template>
+  <router-link to="/">Home</router-link> |
+  <router-link to="/about">About</router-link>
   <component @startGame="startGame" v-bind:is="currentView"></component>
 </template>
 
