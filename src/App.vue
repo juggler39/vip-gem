@@ -1,33 +1,17 @@
 <template>
-  <router-link to="/">Home</router-link> |
-  <router-link to="/about">About</router-link>
-  <component @startGame="startGame" v-bind:is="currentView"></component>
+  <router-view></router-view>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import StartScreen from './components/StartScreen.vue';
-import MainScreen from './components/MainScreen.vue';
+import { Vue } from 'vue-class-component';
 
-@Options({
-  components: {
-    StartScreen,
-    MainScreen
-  }
-})
 export default class App extends Vue {
-  //currentView = "MainScreen";
-  currentView = 'StartScreen';
-  startGame(): void {
-    this.currentView = 'MainScreen';
+  public removePreloader(): void {
+    const elem = document.getElementById('preloader');
+    elem?.remove();
+  }
+  mounted(): void {
+    this.removePreloader();
   }
 }
 </script>
-
-<style lang="scss">
-@use './assets/styles/main';
-#app {
-  height: 100vh;
-  width: 100vw;
-}
-</style>

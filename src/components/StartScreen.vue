@@ -41,19 +41,14 @@ export default defineComponent({
       gsap.set('#earth', {
         y: 220
       });
-      tl.to('#preloader', {
-        opacity: 0,
-        duration: 3,
-        onComplete: this.removePreloader
-      })
-        .to(
-          '#earth',
-          {
-            y: 0,
-            duration: 3
-          },
-          0
-        )
+      tl.to(
+        '#earth',
+        {
+          y: 0,
+          duration: 3
+        },
+        0
+      )
         .to('.cloud', {
           opacity: 1,
           scale: 1,
@@ -105,10 +100,6 @@ export default defineComponent({
           },
           '>'
         );
-    },
-    removePreloader() {
-      const elem = document.getElementById('preloader');
-      elem?.remove();
     }
   }
 });
