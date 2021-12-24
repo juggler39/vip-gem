@@ -16,10 +16,16 @@
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
+  <ClassComponent />
+  <DefineComponent />
 </template>
 
 <script>
+import ClassComponent from '@/components/training/ClassComponent.vue';
+import DefineComponent from '@/components/training/DefineComponent.vue';
+
 export default {
+  components: { ClassComponent, DefineComponent },
   data() {
     return {
       animatedBlock: false,

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
+import EventList from '../views/EventList.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -15,6 +16,22 @@ const routes: Array<RouteRecordRaw> = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/typescript',
+    name: 'TypeScript',
+    component: () => import('../views/TypeScript.vue')
+  },
+  {
+    path: '/events',
+    name: 'EventList',
+    component: EventList
+  },
+  {
+    path: '/event/:id',
+    name: 'EventDetails',
+    props: true,
+    component: () => import('../views/EventDetails.vue')
   }
 ];
 
