@@ -20,11 +20,13 @@
   <DefineComponent />
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import ClassComponent from '@/components/training/ClassComponent.vue';
 import DefineComponent from '@/components/training/DefineComponent.vue';
 
-export default {
+export default defineComponent({
+  name: 'TrainingMain',
   components: { ClassComponent, DefineComponent },
   data() {
     return {
@@ -47,7 +49,7 @@ export default {
       this.dialogIsVisible = false;
     }
   }
-};
+});
 </script>
 
 <style scoped>

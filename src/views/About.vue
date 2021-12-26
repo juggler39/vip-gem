@@ -1,7 +1,8 @@
 <template>
   <router-link to="/">Home</router-link> |
   <router-link to="/about">About</router-link> |
-  <router-link to="/typescript">Typescript</router-link> |
+  <router-link to="/typescript">Typescript</router-link>
+  |
   <TrainingMain />
 </template>
 

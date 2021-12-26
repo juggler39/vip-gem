@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <p>Hello World Class Component</p>
+    <p data-testid="hello">Hello World Class Component</p>
   </div>
 </template>
 

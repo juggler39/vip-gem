@@ -5,8 +5,11 @@
   </form>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  name: 'LoginForm',
   data() {
     return {
       name: ''
@@ -18,5 +21,5 @@ export default {
       this.$emit('formSubmitted', { name: this.name });
     }
   }
-};
+});
 </script>

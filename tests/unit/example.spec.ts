@@ -1,12 +1,10 @@
-import { shallowMount } from '@vue/test-utils';
-import HelloWorld from '@/components/HelloWorld.vue';
+import { mount } from '@vue/test-utils';
+import About from '@/components/training/ClassComponent.vue';
 
-describe('HelloWorld.vue', () => {
+describe('ClassComponent.vue', () => {
   it('renders props.msg when passed', () => {
-    const msg = 'new message';
-    const wrapper = shallowMount(HelloWorld, {
-      props: { msg }
-    });
-    expect(wrapper.text()).toMatch(msg);
+    const wrapper = mount(About, {});
+    const message = wrapper.find('[data-testid="hello"]').text();
+    expect(message).toMatch('Hello World');
   });
 });
