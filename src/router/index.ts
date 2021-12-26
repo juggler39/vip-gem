@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
 import EventList from '../views/EventList.vue';
+import Todo from '../views/Todo.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,7 +21,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/typescript',
     name: 'TypeScript',
-    component: () => import('../views/TypeScript.vue')
+    component: () => import('@/views/TypeScript.vue')
   },
   {
     path: '/events',
@@ -31,7 +32,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/event/:id',
     name: 'EventDetails',
     props: true,
-    component: () => import('../views/EventDetails.vue')
+    component: () => import('@/views/EventDetails.vue')
+  },
+  {
+    path: '/todo',
+    name: 'Todo',
+    component: Todo
   }
 ];
 

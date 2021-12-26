@@ -4,6 +4,7 @@
 
 <script lang="ts">
 import { Vue } from 'vue-class-component';
+import { gsap } from 'gsap';
 
 export default class App extends Vue {
   public removePreloader(): void {
@@ -11,7 +12,11 @@ export default class App extends Vue {
     elem?.remove();
   }
   mounted(): void {
-    this.removePreloader();
+    gsap.to('#preloader', {
+      opacity: 0,
+      duration: 3,
+      onComplete: this.removePreloader
+    });
   }
 }
 </script>

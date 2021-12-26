@@ -2,6 +2,22 @@
   <h1>Events for Good</h1>
   <div class="events">
     <EventCard v-for="event in events" :key="event.id" :event="event" />
+    <button
+      @click="
+        addEvent({
+          id: 1,
+          category: 'asdf',
+          title: 'asdf',
+          description: 'asdf',
+          location: 'asdf',
+          date: 'asdf',
+          time: 'asdf',
+          organizer: 'asdf'
+        })
+      "
+    >
+      Click me
+    </button>
   </div>
 </template>
 
@@ -28,6 +44,14 @@ export default defineComponent({
       .catch((error) => {
         console.log(error);
       });
+  },
+  methods: {
+    addEvent(newEvent: EventItem) {
+      this.events.push(newEvent);
+    },
+    secondEvent(): EventItem {
+      return this.events[1];
+    }
   }
 });
 </script>
