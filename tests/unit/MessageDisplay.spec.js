@@ -1,4 +1,4 @@
-import MessageDisplay from '@/components/MessageDisplay';
+import MessageDisplay from '@/components/MessageDisplay.vue';
 import { mount } from '@vue/test-utils';
 import { getMessage } from '@/services/axios';
 import flushPromises from 'flush-promises';

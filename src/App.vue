@@ -7,16 +7,20 @@ import { Vue } from 'vue-class-component';
 import { gsap } from 'gsap';
 
 export default class App extends Vue {
+  preloaderAnimation = gsap.to('#preloader', {
+    opacity: 0,
+    duration: 3,
+    onComplete: this.removePreloader
+  });
   public removePreloader(): void {
-    const elem = document.getElementById('preloader');
-    elem?.remove();
+    document.getElementById('preloader')?.remove();
   }
   mounted(): void {
-    gsap.to('#preloader', {
-      opacity: 0,
-      duration: 3,
-      onComplete: this.removePreloader
-    });
+    this.preloaderAnimation;
+  }
+  onBeforeUnmount(): void {
+    console.log('destroing');
+    this.preloaderAnimation.kill();
   }
 }
 </script>

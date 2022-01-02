@@ -1,46 +1,3 @@
-<script lang="ts">
-import { defineComponent, reactive, toRefs, computed } from 'vue';
-import { TodoItem } from '@/types/Todo';
-export default defineComponent({
-  setup() {
-    const state = reactive({
-      newTask: {
-        label: '',
-        type: 'personal'
-      } as TodoItem,
-      taskItems: [] as TodoItem[],
-      listFilter: 'all'
-    });
-
-    const filteredTasks = computed(() => {
-      if (state.listFilter === 'complete') {
-        return state.taskItems.filter(
-          (item: TodoItem) => item.isComplete === true
-        );
-      } else if (state.listFilter === 'incomplete') {
-        return state.taskItems.filter(
-          (item: TodoItem) => item.isComplete === false
-        );
-      } else {
-        return state.taskItems;
-      }
-    });
-    const addTask = () => {
-      state.taskItems.push({
-        ...state.newTask,
-        isComplete: false
-      });
-    };
-
-    return {
-      ...toRefs(state),
-      filteredTasks,
-      addTask
-    };
-  }
-});
-</script>
-
 <template>
   <div class="todo-page">
     <h1>Todo</h1>
@@ -65,7 +22,8 @@ export default defineComponent({
       <button @click="listFilter = 'incomplete'">Incomplete</button> |
       <button @click="listFilter = 'complete'">Complete</button>
     </div>
-    <ul>
+    <p v-if="isLoading">Loading...</p>
+    <ul v-else>
       <li v-for="(task, index) in filteredTasks" :key="`task-${index}`">
         <input type="checkbox" v-model="task.isComplete" /> {{ task.label }} ({{
           task.type
@@ -74,6 +32,79 @@ export default defineComponent({
     </ul>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent, reactive, toRefs, computed } from 'vue';
+import { onMounted } from 'vue';
+import { TodoItem } from '@/types/Todo';
+export default defineComponent({
+  setup() {
+    const state = reactive({
+      newTask: {
+        label: '',
+        type: 'personal'
+      } as TodoItem,
+      taskItems: [] as TodoItem[],
+      listFilter: 'all',
+      isLoading: false
+    });
+
+    const filteredTasks = computed(() => {
+      if (state.listFilter === 'complete') {
+        return state.taskItems.filter(
+          (item: TodoItem) => item.isComplete === true
+        );
+      } else if (state.listFilter === 'incomplete') {
+        return state.taskItems.filter(
+          (item: TodoItem) => item.isComplete === false
+        );
+      } else {
+        return state.taskItems;
+      }
+    });
+
+    const addTask = () => {
+      state.taskItems.push({
+        ...state.newTask,
+        isComplete: false
+      });
+      fetch('https://vip-gem-default-rtdb.firebaseio.com/tasks.json', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...state.newTask, isComplete: false })
+      });
+    };
+
+    const loadTasks = () => {
+      state.isLoading = true;
+      fetch('https://vip-gem-default-rtdb.firebaseio.com/tasks.json')
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          state.taskItems = [...(Object.values(data) as TodoItem[])];
+          state.isLoading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+    onMounted(() => {
+      loadTasks();
+    });
+
+    return {
+      ...toRefs(state),
+      filteredTasks,
+      addTask,
+      loadTasks
+    };
+  }
+});
+</script>
 
 <style scoped>
 .todo-page {

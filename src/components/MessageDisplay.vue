@@ -3,13 +3,15 @@
   <p v-else data-testid="message">{{ message.text }}</p>
 </template>
 
-<script>
-import { getMessage } from '@/services/axios.js';
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { getMessage } from '@/services/axios';
+export default defineComponent({
+  name: 'MessageDisplay',
   data() {
     return {
       message: {},
-      error: null
+      error: null as null | string
     };
   },
   async created() {
@@ -19,5 +21,5 @@ export default {
       this.error = 'Oops! Something went wrong.';
     }
   }
-};
+});
 </script>

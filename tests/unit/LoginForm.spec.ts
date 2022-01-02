@@ -10,13 +10,14 @@ describe('LoginForm', () => {
     wrapper.trigger('submit'); // Simulate form submission
 
     // Assert event has been emitted
-    const formSubmittedCalls = wrapper.emitted('formSubmitted');
+    const formSubmittedCalls: Array<Array<unknown>> | undefined =
+      wrapper.emitted('formSubmitted');
     expect(formSubmittedCalls).toHaveLength(1);
 
     // Assert payload is correct
     const expectedPayload = { name: 'Ilya' };
-    expect(wrapper.emitted('formSubmitted')[0][0]).toMatchObject(
-      expectedPayload
-    );
+    if (formSubmittedCalls) {
+      expect(formSubmittedCalls[0][0]).toMatchObject(expectedPayload);
+    }
   });
 });
