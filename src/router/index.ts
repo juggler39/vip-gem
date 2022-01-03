@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
 import EventList from '../views/EventList.vue';
 import Todo from '../views/Todo.vue';
+import Vuex from '../views/Vuex.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -38,6 +39,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/todo',
     name: 'Todo',
     component: Todo
+  },
+  {
+    path: '/vuex',
+    name: 'Vuex',
+    component: Vuex
   }
 ];
 

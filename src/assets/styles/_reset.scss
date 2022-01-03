@@ -159,10 +159,6 @@ optgroup {
     font-weight: bold; /* Restore the font weight unset by the previous rule */
 }
 
-button {
-    overflow: visible; /* Address `overflow` set to `hidden` in IE 8/9/10/11 */
-}
-
 button,
 select {
     text-transform: none; /* Firefox 40+, Internet Explorer 11- */
@@ -202,14 +198,6 @@ button,
     -webkit-appearance: button; /* Correct the inability to style clickable types in iOS */
 }
 
-/* Remove the default button styling in all browsers */
-button,
-input,
-select,
-textarea {
-    background-color: transparent;
-    border-style: none;
-}
 
 a:focus,
 button:focus,
