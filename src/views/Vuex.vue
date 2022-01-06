@@ -1,8 +1,9 @@
 <template>
-  <base-container title="Vuex">
-    <h3>{{ $store.state.counter }}</h3>
-    <button @click="addOne">Add 1</button>
-  </base-container>
+  <baseContainer title="Vuex">
+    <h3>{{ counter }}</h3>
+    <button @click="add(2)">Add 2</button>
+    <button @click="add(-1)">Subtract 1</button>
+  </baseContainer>
 </template>
 
 <script lang="ts">
@@ -14,24 +15,16 @@ export default defineComponent({
   components: {
     BaseContainer
   },
+  computed: {
+    counter() {
+      return store.state.counter;
+    }
+  },
   methods: {
-    addOne(): void {
-      store.state.counter++;
+    add(n: number): void {
+      //store.commit('increment', { value: n });
+      store.commit({ type: 'increment', value: n });
     }
   }
 });
 </script>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-family: sans-serif;
-}
-
-body {
-  margin: 0;
-}
-</style>

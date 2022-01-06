@@ -11,7 +11,14 @@ export interface State {
 export const key: InjectionKey<Store<State>> = Symbol();
 
 export const store = createStore<State>({
+  strict: process.env.NODE_ENV !== 'production',
   state: {
     counter: 0
+  },
+  mutations: {
+    increment(state, payload) {
+      // mutate state
+      state.counter += payload.value;
+    }
   }
 });
