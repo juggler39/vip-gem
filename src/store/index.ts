@@ -20,5 +20,10 @@ export const store = createStore<State>({
       // mutate state
       state.counter += payload.value;
     }
+  },
+  getters: {
+    finalCounter(state) {
+      return state.counter * 2;
+    }
   }
 });

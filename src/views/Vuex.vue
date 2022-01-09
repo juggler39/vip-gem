@@ -17,7 +17,7 @@ export default defineComponent({
   },
   computed: {
     counter() {
-      return store.state.counter;
+      return store.getters.finalCounter;
     }
   },
   methods: {
