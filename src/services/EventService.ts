@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const apiClient = axios.create({
   baseURL: 'https://my-json-server.typicode.com/Code-Pop/Real-World_Vue-3',
@@ -10,10 +10,10 @@ const apiClient = axios.create({
 });
 
 export default {
-  getEvents() {
+  getEvents(): Promise<AxiosResponse> {
     return apiClient.get('/events');
   },
-  getEvent(id: any) {
+  getEvent(id: number): Promise<AxiosResponse> {
     return apiClient.get('/events/' + id);
   }
 };

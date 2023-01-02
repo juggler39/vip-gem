@@ -73,8 +73,10 @@ export default defineComponent({
       onDrag: function () {
         let i = items.length;
         while (--i > -1) {
-          if (this.hitTest(items[i], 60)) {
-            console.log('hit');
+          if (this.hitTest(items[i], '80%')) {
+            console.log(`hit ${i}`);
+            const target = this.target;
+            Draggable.get(target).disable();
           }
         }
       },
