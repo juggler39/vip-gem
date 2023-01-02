@@ -40,7 +40,7 @@ jobs:
       uses: garygrossgarten/github-action-ssh@release
       with:
         command: ls -a
-        host: ${{ secrets.HOST }}
+        host: juggler39.myjino.ru
         username: juggler39
         passphrase: ${{ secrets.PASSPHRASE }}
         privateKey: ${{ secrets.PRIVATE_KEY}}
