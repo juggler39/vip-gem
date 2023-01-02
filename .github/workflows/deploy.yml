@@ -1,0 +1,40 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+env:
+  SSH_KEY: ${{ secrets.VIP_SSH_KEY }}
+  SSH_USER: ${{ secrets.VIP_SSH_USER }}
+  SSH_HOST: ${{ secrets.VIP_SSH_HOST }}
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup node.js environment
+      uses: actions/setup-node@v3
+    - name: Install dependencies and build
+      working-directory: .
+      run: |
+        npm install
+        npm run build
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v3
+      with:
+        name: build
+        path: dist
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v3
+      with:
+        name: build
+    - run: |
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "${{ secrets.VIP_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        echo "${{ secrets.VIP_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+    - name: Deploy with rsync
+      run: rsync -rav --delete / juggler39@$juggler39.myjino.ru:/domains/prochess.ru
