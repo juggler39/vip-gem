@@ -47,7 +47,7 @@ jobs:
     - name: upload files
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: rsync -rav --delete /dist juggler39@juggler39.myjino.ru:/domains/prochess.ru
+        command: rsync -avzhe ssh /dist juggler39@juggler39.myjino.ru:/domains/prochess.ru
         host: juggler39.myjino.ru
         username: juggler39
         password: ${{ secrets.PASSPHRASE }}
