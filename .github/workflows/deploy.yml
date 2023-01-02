@@ -44,3 +44,11 @@ jobs:
         username: juggler39
         password: ${{ secrets.PASSPHRASE }}
         privateKey: ${{ secrets.PRIVATE_KEY}}
+    - name: upload files
+      uses: garygrossgarten/github-action-ssh@release
+      with:
+        command: rsync -rav --delete / /domains/prochess.ru
+        host: juggler39.myjino.ru
+        username: juggler39
+        password: ${{ secrets.PASSPHRASE }}
+        privateKey: ${{ secrets.PRIVATE_KEY}}
