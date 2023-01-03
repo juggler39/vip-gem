@@ -5,12 +5,6 @@ on:
   push:
     branches:
       - main
-env:
-  SSH_KEY: ${{ secrets.VIP_SSH_KEY }}
-  SSH_USER: ${{ secrets.VIP_SSH_USER }}
-  SSH_HOST: ${{ secrets.VIP_SSH_HOST }}
-
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -39,7 +33,6 @@ jobs:
         command: ls -a
         host: juggler39.myjino.ru
         username: juggler39
-        password: ${{ secrets.PASSPHRASE }}
         privateKey: ${{ secrets.PRIVATE_KEY}}
 
     - name: Install SSH Key
