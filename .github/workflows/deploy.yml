@@ -49,7 +49,7 @@ jobs:
         known_hosts: unnecessary
 
     - name: Adding Known Hosts
-      run: ssh-keyscan -H 81.177.135.3  >> ~/.ssh/known_hosts
+      run: ssh-keyscan -t rsa 81.177.135.3  >> ~/.ssh/known_hosts
 
     - name: Deploy with rsync
       run: rsync -avz ./dist/ juggler39@juggler39.myjino.ru:/domains/prochess.ru/
