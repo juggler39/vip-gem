@@ -5,6 +5,13 @@ on:
   push:
     branches:
       - main
+
+env:
+  SSH_KEY: ${{ secrets.PRIVATE_KEY }}
+  SSH_USER: ${{ secrets.USERNAME }}
+  SSH_HOST: ${{ secrets.HOST }}
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,23 +33,20 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: build
-    - name: ls -a via ssh
-      uses: garygrossgarten/github-action-ssh@release
-      with:
-        command: ls -a
-        host: juggler39.myjino.ru
-        username: juggler39
-        password: ${{ secrets.PASSPHRASE }}
-        privateKey: ${{ secrets.PRIVATE_KEY}}
 
-    - name: Install SSH Key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.PRIVATE_KEY }}
-        known_hosts: unnecessary
+    - name: 'Create SSH key'
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        cat >>~/.ssh/config <<END
+        Host production
+          HostName $SSH_HOST
+          User $SSH_USER
+          IdentityFile ~/.ssh/id_rsa
+          StrictHostKeyChecking no
+        END
 
-    - name: Adding Known Hosts
-      run: ssh-keyscan -p 22 -H juggler39.myjino.ru  >> ~/.ssh/known_hosts
-
-    - name: Deploy with rsync
-      run: sshpass -p "${{ secrets.PASSPHRASE}}" rsync -avz --delete ./dist/ juggler39@juggler39.myjino.ru:~/domains/prochess.ru
+    - name: 'LS'
+      shell: bash
+      run: ssh production "ls -a"
