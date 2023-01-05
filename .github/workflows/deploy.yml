@@ -35,19 +35,6 @@ jobs:
       with:
         name: build
 
-    - name: 'Create SSH key'
-      run: |
-        mkdir -p ~/.ssh
-        echo "$SSH_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        cat >>~/.ssh/config <<END
-        Host production
-          HostName $SSH_HOST
-          User $SSH_USER
-          IdentityFile ~/.ssh/id_rsa
-          StrictHostKeyChecking no
-        END
-
     - name: 'LS'
-      shell: bash
-      run: ssh production "ls -a"
+      run: |
+        ssh dev 'juggler39@juggler39.myjino.ru && $SSH_PASSWORD && ls-a'
