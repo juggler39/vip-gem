@@ -10,6 +10,7 @@ env:
   SSH_KEY: ${{ secrets.PRIVATE_KEY }}
   SSH_USER: ${{ secrets.USERNAME }}
   SSH_HOST: ${{ secrets.HOST }}
+  SSH_PASSWORD: ${{ secrets.PASSWORD }}
 
 
 jobs:
